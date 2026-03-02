@@ -1,0 +1,1316 @@
+day 1
+------------
+Camel Case
+***************
+
+One of the important aspects of object-oriented programming is the readability of the code.
+
+To enhance the readability of code, developers write function and variable names in the Camel case.
+
+Steve has given you a string, S, which is written in Camel case.
+
+Write a program to find all the words contained in it in the same order as they appear in the given string and print each word in a new line.
+
+Note: Camel case is a style of writing where the first letter of each word, except the first word, is capitalized.
+
+Function Description:
+
+In the provided code snippet, implement the provided camelCase(...) method to print each word of the camel case string S in a new line. You can write your code in the space below the phrase “WRITE YOUR LOGIC HERE”.
+
+There will be multiple test cases running so the Input and Output should match exactly as provided.
+
+Input Format:
+
+A single line containing the string S, where S consists of lowercase and uppercase English letters only. The length of S will be at least 1 and at most 1000.
+
+Output Format:
+
+Print each word of the camel case string S in a new line.
+
+Constraints:
+
+|S|<=1000
+
+S will consist of lowercase and uppercase English letters only.
+
+Sample Input:
+
+heyThereIAmGood
+
+Sample Output:
+
+hey
+
+There
+
+I
+
+Am
+
+Good
+
+Explanation:
+
+In this case, the input string "heyThereIAmGood" is in camel case. The words are separated based on the capitalization, and each word is printed in a new line.
+
+Technology Stack
+Evaluation Criteria
+uiUx
+15%
+codeQuality
+25%
+architecture
+25%
+functionality
+30%
+databaseDesign
+5%
+
+
+
+---
+StringBuilder w = new StringBuilder();
+ 
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+ 
+            if (Character.isUpperCase(ch)) {
+                System.out.println(w.toString());
+                w= new StringBuilder();
+            }
+            w.append(ch);
+        }
+ 
+        System.out.println(w.toString());
+
+
+
+scanner.close();
+
+
+
+
+
+-----------------------------
+
+
+day2
+
+
+Sort Array
+ ***************
+An array A of integers is given.
+You need to sort the elements of the array by the number of digits present in them in ascending order, i.e. the elements with lesser no. of digits appear before the elements with greater no. of digits.
+Sort the array as specified and return the resulting array.
+ 
+Note:
+The elements with the same number of digits should appear in the same order in which they appeared in the original array.
+ 
+Function Description
+In the provided code snippet, implement the provided sortArray(...) method to return the resulting array. You can write your code in the space below the phrase “WRITE YOUR LOGIC HERE”.
+ 
+There will be multiple test cases running so the Input and Output should match exactly as provided.
+ 
+Input Format
+The first line contains an integer N.
+The second line contains an array of integers.
+Output Format
+The output contains the sorted array according to the condition.
+Constraints
+1 <= N <= 10^5.
+1 <= Ai <= 10^9.
+ 
+Sample Input
+5 -- denotes the size N of an array A.
+9 10 122 8 1290 -- denotes the elements of an array A.
+Sample Output
+9 8 10 122 1290
+ 
+Explanation
+A1 = 9, number of digits = 1,
+A2 = 10, number of digits = 2,
+A3 = 122, number of digits = 3,
+A4 = 8, number of digits = 1,
+A5 = 1290, number of digits = 4.
+It can be seen that after sorting the elements by the number of digits present in them in ascending order, the sorted array will be:
+9 8 10 122 1290.
+9 appears before 8 as it occurs before 8 in the input array.
+Hence, the obtained output is 9 8 10 122 1290.
+Technology Stack
+Evaluation Criteria
+uiUx
+15%
+codeQuality
+25%
+architecture
+25%
+functionality
+30%
+databaseDesign
+5%
+ 
+ 
+
+----
+import java.util.*;
+import java.util.List
+import java.util.ArrayList
+
+
+
+// Create buckets for digit counts
+        List<List<Integer>> buckets = new ArrayList<>();
+        for (int i = 0; i <= 10; i++) {
+            buckets.add(new ArrayList<>());
+        }
+
+        // Put elements into buckets
+        for (int i = 0; i < N; i++) {
+            int num = A[i];
+            int digits = String.valueOf(num).length();
+            buckets.get(digits).add(num);
+        }
+
+        // Collect elements in sorted order
+        int index = 0;
+        for (int d = 1; d <= 10; d++) {
+            for (int vasl : buckets.get(d)) {
+                sortedArray[index++] = vasl;
+            }
+        }
+
+        return sortedArray;
+    }
+
+*************
+mam ans 
+
+
+package Ashwini;
+import java.util.Scanner;
+ 
+public class fifthday {
+ 
+    public static void main(String[] args) {
+ 
+        Scanner sc = new Scanner(System.in);
+ 
+        System.out.println("Enter size of array");
+        int N = sc.nextInt();
+        int[] A = new int[N];
+ 
+        for (int i = 0; i < N; i++) {
+       	System.out.println("Enter Number "+(i+1));
+            A[i] = sc.nextInt();
+        }
+ 
+        sortArray(A, N);
+ 
+        System.out.println("Sorted Array:");
+        for (int i = 0; i < N; i++) {
+            System.out.print(A[i] + " ");
+        }
+ 
+        sc.close();
+    }
+ 
+    public static int[] sortArray(int[] A, int N) {
+ 
+        for (int i = 0; i < N - 1; i++) {
+            for (int j = 0; j < N - i - 1; j++) {
+ 
+                int d1 = countDigits(A[j]);
+                int d2 = countDigits(A[j + 1]);
+ 
+                // Stable swap
+                if (d1 > d2) {
+                    int temp = A[j];
+                    A[j] = A[j + 1];
+                    A[j + 1] = temp;
+                }
+            }
+        }
+        return A;
+    }
+ 
+    private static int countDigits(int num) {
+        if (num == 0) return 1;
+ 
+        int digits = 0;
+        while (num > 0) {
+            digits++;
+            num /= 10;
+        }
+        return digits;
+    }
+}
+ 
+
+
+//9 10 122 8 1290
+//
+//Output
+//9 8 10 122 1290
+ 
+
+
+
+
+
+
+
+----
+
+day3
+
+
+Description
+Simple Calculator
+************************
+Create an arithmetic calculator program that should perform addition, subtraction, multiplication, and division based on the given operator. The calculator should handle division by zero gracefully by displaying an appropriate error message and returning zero. Write a program to implement a calculator using the concept of the Class in Object Oriented Programming.
+
+Function Description
+
+-Create a class Calculator with methods for performing arithmetic operations. You need to complete the class by writing the logic for each operation and a function to handle the calculation based on the given operator.
+
+* int add(int a, int b): This method should add two numbers and return the result.
+
+* int subtract(int a, int b): This method should subtract the second number from the first and return the result.
+
+* int multiply(int a, int b): This method should multiply two numbers and return the result.
+
+* int divide(int a, int b):
+
+1) This method should divide the first number by the second and return the result.
+
+2) If the second number is zero, print "Err: division by zero" and return 0.
+
+-Implement the function calculate():
+
+* int calculate(int a, int b, char op): This function should accept two numbers and an operator, perform the corresponding arithmetic operation using the Calculator class, and return the result.
+
+You can write your code in the space below the phrase “WRITE YOUR LOGIC HERE”. There will be multiple test cases running so the Input and Output should match exactly as provided.
+
+NOTE:
+
+The declaration of variable type should be int.
+
+Only valid operations are +, -, *, /
+
+Input Format:
+
+The first line of input contains the space-separated integer values of a and b.
+
+The second line of input contains the sign of operation( + , - , * , / ).
+
+Output Format:
+
+The program should return the result of the arithmetic operation. If division by zero occurs, print "Err: division by zero".
+
+Constraints:
+
+The numbers will be integers within the range [-10^6, 10^6].
+
+The operator will be one of the following: '+', '-', '*', '/'.
+
+Sample Input 1:
+
+8 7 -- denotes values of a and b.
+
++ -- denotes operation
+
+Sample Output 1:
+
+15
+
+Explanation 1:
+
+The input provides two numbers, 8 and 7, and the operator '+'.
+
+The program performs the addition: 8 + 7 = 15.
+
+Sample Input 2:
+
+25 0
+
+/
+
+Sample Output 2:
+
+Err: division by zero
+
+Explanation 2:
+
+The input provides two numbers, 25 and 0, and the operator '/'.
+
+The program performs the division, but since division by zero is not allowed, it prints an error message.
+
+Note:
+
+*The output should be same like mentioned in the output format (or) sample output with respected 'whitespace' and ':' , If not the testcases will get failed.
+
+Technology Stack
+Evaluation Criteria
+uiUx
+15%
+codeQuality
+25%
+architecture
+25%
+functionality
+30%
+databaseDesign
+5%
+
+
+
+
+
+-
+
+switch(op) {
+    case '+': return a + b;
+    case '-': return a - b;
+    case '*': return a * b;
+    case '/':
+        if (b == 0) {
+            System.out.println("Err: division by zero");
+            return 0;
+        }
+
+          return a/b;  
+        default:
+        return 0;
+}
+
+------------------------
+
+
+day 4:
+Movie Library Management System
+
+
+Description
+Movie Library Management System
+
+Develop a robust system capable of managing a collection of movies with functionalities for searching, sorting, and displaying movies based on various attributes like title, release date, director, duration, and more. The system should allow users to search for movies by any keyword present in the movie's title, director's name, or cast members' names, and sort the entire collection based on specified attributes in either ascending or descending order.
+
+Function Description:
+
+Create a Searchable interface with searchByKeyword().
+
+Create an abstract class MediaItem which should inherit Searchable interface and having title(string), releaseDate(string) and rating(double) with constructor accepting all three attributes and there must be getter methods for all the three attributes.
+
+Implement the Movie class that extends the abstract class MediaItem and defines searchByKeyword method.
+
+Movie class should have director(string), cast(list of string) and duration(int) as private attributes with constructor accepting all these attributes.
+
+searchByKeyword(): Returns true if the keyword appears in the movie's director, title, or any of the cast members' names.
+
+You need to define sortByAttribute(): Sorts the list of movies based on the given attribute (title, release date, director, or duration) and order (asc or desc).
+
+You can write your code in the space below the phrase “WRITE YOUR LOGIC HERE”. There will be multiple test cases running so the Input and Output should match exactly as provided.
+
+Constraints:
+
+1 ≤ N ≤ 100
+
+Movie durations are given in whole minutes.
+
+Ratings are provided as doubles.
+
+Titles, directors, and cast members are non-empty strings without special formatting requirements.
+
+The program should handle input in lowercase or uppercase letters interchangeably.
+
+The search and sort operations should be case-insensitive.
+
+Input Format:
+
+The first input line contains the number of movies, N.
+
+For each movie, the following details are entered in sequence:
+
+* Movie Title
+
+* Release Date
+
+* Rating
+
+* Director
+
+* Duration (in minutes)
+
+* Cast (comma-separated list)
+
+After the movies are input, the next two lines specify the attribute to sort by and the order (asc for ascending, desc for descending).
+
+The last input line is the keyword for searching movies.
+
+Output Format:
+
+Return the titles of movies that match the search keyword.
+
+After performing the sort operation, return the titles of all movies in the sorted order.
+
+Sample Input 1:
+
+2
+
+Inception
+
+2010-07-16
+
+8.8
+
+Christopher Nolan
+
+148
+
+Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page
+
+The Prestige
+
+2006-10-20
+
+8.5
+
+Christopher Nolan
+
+130
+
+Christian Bale, Hugh Jackman, Scarlett Johansson
+
+director
+
+desc
+
+Nolan
+
+Sample Output 1:
+
+Inception
+
+The Prestige
+
+Inception
+
+The Prestige
+
+Explanation 1:
+
+The input consists of details for two movies followed by sorting instructions (director, desc) and a search keyword (Nolan).
+
+The output first lists movies matching the keyword "Nolan" in the director's name.
+
+Then, it lists all movies sorted by director in descending order. Sorting by director in descending order does not change the order in this case since both movies have the same director.
+
+Sample Input 2:
+
+3
+
+Interstellar
+
+2014-11-07
+
+8.6
+
+Christopher Nolan
+
+169
+
+Matthew McConaughey, Anne Hathaway
+
+Inception
+
+2010-07-16
+
+8.8
+
+Christopher Nolan
+
+148
+
+Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page
+
+Arrival
+
+2016-11-11
+
+7.9
+
+Denis Villeneuve
+
+116
+
+Amy Adams, Jeremy Renner
+
+title
+
+asc
+
+Nolan
+
+Sample Output 2:
+
+Interstellar
+
+Inception
+
+Arrival
+
+Inception
+
+Interstellar
+
+Explanation 2:
+
+The input consists of details for three movies followed by sorting instructions (title, asc) and a search keyword (Nolan).
+
+First, the titles of the movies matching the search keyword "Nolan" are returned:
+
+Interstellar
+
+Inception
+
+Then, the system prints all movies sorted by their titles. Despite Arrival not matching the keyword Nolan, it appears in the sorted list because the sort operation applies to all movies:
+
+Arrival
+
+Inception
+
+Interstellar
+
+NOTE:
+
+*You are free to add any other methods or classes as needed.
+
+* Ensure that the search and sort operations are case-insensitive.
+
+* Implement appropriate error handling for invalid input or operations.
+
+Technology Stack
+Evaluation Criteria
+uiUx
+15%
+codeQuality
+25%
+architecture
+25%
+functionality
+30%
+databaseDesign
+5
+
+
+
+solution
+*********
+
+
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+
+// Write your code here for Searchable interface:
+interface Searchable {
+    boolean searchByKeyword(String keyword);
+}
+
+// Write your code here for MediaItem abstract class:
+abstract class MediaItem implements Searchable {
+    protected String title;
+    protected String releaseDate;
+    protected double rating;
+
+    public MediaItem(String title, String releaseDate, double rating) {
+        this.title = title;
+        this.releaseDate = releaseDate;
+        this.rating = rating;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+}
+
+// Write your code here for Movie class:
+class Movie extends MediaItem {
+    private String director;
+    private List<String> cast;
+    private int duration;
+
+    public Movie(String title, String releaseDate, double rating,
+                 String director, List<String> cast, int duration) {
+        super(title, releaseDate, rating);
+        this.director = director;
+        this.cast = cast;
+        this.duration = duration;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    @Override
+    public boolean searchByKeyword(String keyword) {
+        String key = keyword.toLowerCase();
+
+        if (title.toLowerCase().contains(key)) return true;
+        if (director.toLowerCase().contains(key)) return true;
+
+        for (String member : cast) {
+            if (member.toLowerCase().contains(key)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+public class Main {
+
+    public static void sortByAttribute(List<Movie> movieList, String attribute, String order) {
+
+        Comparator<Movie> comparator = null;
+        String attr = attribute.toLowerCase();
+        String ord = order.toLowerCase();
+
+        switch (attr) {
+            case "title":
+                comparator = Comparator.comparing(m -> m.getTitle().toLowerCase());
+                break;
+
+            case "releasedate":
+                comparator = Comparator.comparing(m -> m.getReleaseDate().toLowerCase());
+                break;
+
+            case "director":
+                comparator = Comparator.comparing(m -> m.getDirector().toLowerCase());
+                break;
+
+            case "duration":
+                comparator = Comparator.comparingInt(Movie::getDuration);
+                break;
+        }
+
+        if (comparator != null) {
+            if (ord.equals("desc")) {
+                comparator = comparator.reversed();
+            }
+            Collections.sort(movieList, comparator);
+        }
+    }
+
+    // Non editable starts here
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<Movie> movieList = new ArrayList<>();
+
+        int numberOfMovies = Integer.parseInt(scanner.nextLine());
+
+        for (int i = 0; i < numberOfMovies; i++) {
+            String title = scanner.nextLine();
+            String releaseDate = scanner.nextLine();
+            double rating = Double.parseDouble(scanner.nextLine());
+            String director = scanner.nextLine();
+            int duration = Integer.parseInt(scanner.nextLine());
+            List<String> cast = new ArrayList<>(
+                    Arrays.asList(scanner.nextLine().split(",\\s*"))
+            );
+
+            movieList.add(new Movie(title, releaseDate, rating, director, cast, duration));
+        }
+
+        String sortAttribute = scanner.nextLine();
+        String sortOrder = scanner.nextLine();
+        String searchKeyword = scanner.nextLine();
+
+        movieList.stream()
+                .filter(movie -> movie.searchByKeyword(searchKeyword))
+                .forEach(movie -> System.out.println(movie.getTitle()));
+
+        sortByAttribute(movieList, sortAttribute, sortOrder);
+
+        movieList.forEach(movie -> System.out.println(movie.getTitle()));
+
+        scanner.close();
+    }
+    // Non editable ends here
+}
+
+--------------------------------
+
+
+day 5
+
+
+
+Cafe Order Management System
+*********************************
+
+Problem Statement:
+
+You are tasked with implementing a simple order management system for a cafe. The system allows customers to add beverages and pastries to their orders and calculates the total cost of the order. The system should manage different types of menu items (beverages and pastries) and handle orders dynamically.
+
+Function Description:
+
+-Define an Enum with name ItemType having values as 'BEVERAGE' and 'PASTRY'.
+
+-Create an interface Orderable: This should have a method getPrice() which returns the price of the item.
+
+-Create an abstract class MenuItem: This should implement the Orderable interface and have the following attributes:
+
+* Create name(string) and price(double) variables as members within the class with constructor accepting these two variables.
+
+- Implement the 'Beverage' and 'Pastry' class: This should extend the MenuItem class and have a constructor that takes name and price as parameters.
+
+- Create the Order class: This should manage the order with the following methods:
+
+* addItem(Orderable item): Adds an item to the order and should print as: Order Added: <Item name>
+
+* calculateTotal(): Should calculate and print the total cost of the order in the format: Total Order Cost: <total> and returns the total.
+
+You can write your code in the space below the phrase “WRITE YOUR LOGIC HERE”. There will be multiple test cases running so the Input and Output should match exactly as provided.
+
+Input Format:
+
+The input consists of multiple lines:
+
+Each line contains an action code followed by the necessary information for that action:
+
+1: Add Beverage (followed by beverage name and price)
+
+2: Add Pastry (followed by pastry name and price)
+
+3: Calculate Total
+
+4: Exit
+
+Output Format:
+
+The program should print the following:
+
+For each action to add an item, print "Order Added: <item_name>".
+
+For calculating the total cost, print "Total Order Cost: <total_cost>".
+
+Constraints:
+
+The name of the item is a string containing alphanumeric characters and spaces.
+
+The price of the item is a double-precision floating-point number.
+
+The number of items added to the order is at most 100.
+
+Sample Input 1:
+
+1
+
+Coffee
+
+2.75
+
+2
+
+Croissant
+
+3.00
+
+3
+
+4
+
+Sample Output 1:
+
+Order Added: Coffee
+
+Order Added: Croissant
+
+Total Order Cost: 5.75
+
+Explanation 1:
+
+In the given sample input, the customer performs the following actions:
+
+1) Adds a beverage named "Coffee" priced at 2.75. The output confirms the addition with "Order Added: Coffee".
+
+2) Adds a pastry named "Croissant" priced at 3.00. The output confirms the addition with "Order Added: Croissant".
+
+3) Calculates the total cost of the order, which is 2.75 + 3.00 = 5.75. The output shows "Total Order Cost: 5.75".
+
+4) Exits the application.
+
+Sample Input 2:
+
+1
+
+Latte
+
+44.25
+
+2
+
+Muffin
+
+12.00
+
+3
+
+1
+
+Americano
+
+8.40
+
+3
+
+4
+
+Sample Output 2:
+
+Order Added: Latte
+
+Order Added: Muffin
+
+Total Order Cost: 56.25
+
+Order Added: Americano
+
+Total Order Cost: 64.65
+
+Explanation 2:
+
+In the given sample input, the customer performs the following actions:
+
+1) Adds a beverage named "Latte" priced at 44.25. The output confirms the addition with "Order Added: Latte".
+
+2) Adds a pastry named "Muffin" priced at 12.00. The output confirms the addition with "Order Added: Muffin".
+
+3) Calculates the total cost of the order, which is 44.25 + 12.00 = 56.25. The output shows "Total Order Cost: 56.25".
+
+4) Adds a beverage named "Americano" priced at 8.40. The output confirms the addition with "Order Added: Americano".
+
+5) Calculates the total cost of the order, which is 56.25 + 8.40 = 64.65. The output shows "Total Order Cost: 64.65".
+
+6) Exits the application.
+
+Note:
+
+*The input format allows users to add multiple items and calculate the total cost before exiting the program.
+
+*You are free to add any other methods or classes as needed.
+
+*The output should be same like mentioned in the output format (or) sample output with respected 'whitespace' and ':' , If not the testcases will get failed.
+
+------
+
+-------------------------
+
+Java - Password Validator
+day 6
+
+
+Description
+Password Validator
+********************
+
+Write a program that validates a password based on the following rules:
+
+The password must be at least 8 characters long.
+
+The password must contain at least one uppercase letter.
+
+The password must contain at least one lowercase letter.
+
+The password must contain at least one digit (0-9).
+
+The password must contain at least one special character (@, #, $, %, etc.).
+
+The program should throw a custom exception (InvalidPasswordException) with an appropriate message if the password does not meet the criteria.
+
+Function Description:
+
+* You need to define a custom exception class InvalidPasswordException that extends Exception. The constructor of this class should accept a String message parameter and call the superclass constructor using super(message).
+
+* In the provided code snippet, complete the implementation of the validatePassword() method to enforce the specified password rules. You can write your code in the space below the phrase “WRITE YOUR LOGIC HERE”.
+
+There will be multiple test cases running so the Input and Output should match exactly as provided.
+
+Input Format:
+
+The input contains a single line with a string representing the password entered by the user.
+
+Output Format:
+
+The output should display whether the entered password is valid or not. If it's valid, print "Password is valid." If it's invalid, print "Invalid Password:" followed by the specific error message. For eg.,
+
+Invalid Password: Password must be at least 8 characters long.
+
+Invalid Password: Password must contain at least one uppercase letter.
+
+Invalid Password: Password must contain at least one lowercase letter.
+
+Invalid Password: Password must contain at least one digit (0-9).
+
+Invalid Password: Password must contain at least one special character (@, #, $, %, etc.).
+
+Constraints:
+
+The password string can contain alphanumeric characters and special characters.
+
+Sample Input1:
+
+Abcd@1234
+
+Sample Output1:
+
+Password is valid.
+
+Explanation1:
+
+The provided password "Abcd@1234" meets all the specified rules, and therefore, the output is "Password is valid."
+
+Sample Input2:
+
+IIHT
+
+Sample Output2:
+
+Invalid Password: Password must be at least 8 characters long.
+
+Explanation2:
+
+The provided password "IIHT" does not meet the rule requiring at least 8 characters long. Therefore, the output is "Invalid Password: Password must be at least 8 characters long."
+
+NOTE:
+
+*The output should be same like mentioned in the output format (or) sample output with respected 'whitespace', ':' and '.' , If not the testcases will get failed.
+
+Technology Stack
+Evaluation Criteria
+uiUx
+15%
+codeQuality
+25%
+architecture
+25%
+functionality
+30%
+databaseDesign
+5%
+-------------------
+
+
+
+
+
+
+
+
+day 7
+
+a----------------
+MultiThreading – Calculate Sum of Even Numbers
+-*****************************************************
+
+Problem Description
+
+Write a multi-threaded program that calculates the sum of all even numbers between two given numbers.
+
+**Function Description**
+
+In the provided code snippet, implement the `sumOfRange(int start, int end)` method to print the sum of all even numbers between two given numbers.
+
+You need to find the sum of even numbers in a given range **by using a thread**.
+
+You can write your code in the space below the phrase **"WRITE YOUR LOGIC HERE"**.
+
+There will be multiple test cases running, so the **input and output should match exactly as provided**.
+
+ **Input Format**
+
+* The first line of input contains the **starting number**.
+* The second line of input contains the **ending number**.
+
+**Output Format**
+
+* The output contains the **sum of all even numbers between the two given numbers**.
+
+**Sample Input**
+
+```
+1
+5
+```
+
+### **Sample Output**
+
+```
+6
+```
+**Explanation**
+
+The numbers between 1 and 5 are 2, 3, and 4.
+The even numbers are 2 and 4.
+The sum of the even numbers is:
+2 + 4 = 6
+
+Hence, the output is **6**.
+
+---
+
+**Technology Stack**
+
+* Java
+* Multithreading
+
+---
+
+ **Evaluation Criteria**
+
+* UI/UX: 15%
+* Code Quality: 25%
+* Architecture: 25%
+* Functionality: 30%
+* Database Design: 5%
+
+--------------------------
+7b
+
+
+
+Description
+Print Numbers in Sequence with Multiple Threads
+
+Implement a program that uses three separate threads to print numbers in sequence up to a given integer n. The program should initialize three threads and ensures that they print the numbers in sequence without any overlaps. The user provides the value of n, and the program should print the numbers in the sequence.
+
+Function Description:
+
+In the provided code snippet, complete the implementation of PrintNumbersInSequence constructor to ensure sequential printing of numbers. You can write your code in the space below the phrase “WRITE YOUR LOGIC HERE”.
+
+There will be multiple test cases running so the Input and Output should match exactly as provided.
+
+Input Format:
+
+The program expects a single integer n as input, denoting the maximum value for the sequence.
+
+Output Format:
+
+The program outputs a single line containing the space-separated numbers from 1 to n printed in sequence.
+
+Constraints:
+
+The input integer n is a positive integer.
+
+Sample Input:
+
+10
+
+Sample Output:
+
+1 2 3 4 5 6 7 8 9 10
+
+Explanation:
+
+The program takes the user input 10 and initializes three threads to print numbers in sequence. Each thread prints a portion of the sequence, ensuring that the numbers are printed in the correct order without overlaps. The program prints the sequence 1 2 3 4 5 6 7 8 9 10.
+
+Technology Stack
+Evaluation Criteria
+uiUx
+15%
+codeQuality
+25%
+architecture
+25%
+functionality
+30%
+databaseDesign
+5%
+
+----------------------------------
+day 8
+
+Description
+Count of Intersection
+
+
+In a university, only 3 subjects are taught viz. English, Mathematics, and Science.
+
+You are given 7 integers A, B, C, D, E, F, and G.
+
+A denotes the number of students studying English.
+
+B denotes the number of students studying Maths.
+
+C denotes the number of students studying Science.
+
+D denotes the number of students studying English and Science.
+
+E denotes the number of students studying Maths and English.
+
+F denotes the number of students studying Maths and Science.
+
+G denotes the total number of students.
+
+You need to find the number of students studying all 3 subjects
+
+
+Note:
+
+Each student has to at least study either of the three subjects.
+
+
+Function Description:
+
+In the provided code snippet, implement the provided numStudents(...) method to return a single integer denoting the number of students studying all the three subjects. You can write your code in the space below the phrase “WRITE YOUR LOGIC HERE”.
+
+
+There will be multiple test cases running so the Input and Output should match exactly as provided.
+
+Constraints:
+
+1<=A,B,C,D,E,F,G<=1000
+
+
+Input Format:
+
+The first and the only line of input contains 7 space-separated integers denoting A, B, C, D, E, F, and G respectively.
+
+Output Format:
+
+The first and the only line of output should contain a single integer denoting the number of students studying all three subjects.
+
+
+Sample Input:
+
+25 26 26 11 9 8 52
+
+
+Sample Output:
+
+3
+
+
+Explanation:
+
+For 3 sets X, Y and Z, we know that,
+
+n(X⋂Y⋂Z) = n(A⋃B⋃C)-n(A)-n(B)-n(C)+n(A⋂B)+n(B⋂C)+n(C⋂A)
+
+Substituting the values, we get
+
+n(X⋂Y⋂Z) = 52-25-26-26+11+9+8 = 3
+
+Technology Stack
+Evaluation Criteria
+uiUx
+15%
+codeQuality
+25%
+architecture
+25%
+functionality
+30%
+databaseDesign
+5
+
+
+
+-------------
+day 9 
+
+String Length
+
+
+You have a string S. You should choose any two characters and delete all of their occurrences in the string.
+
+Return the minimum length of S possible after the given operations.
+
+
+Function Description:
+
+In the provided code snippet, implement the provided minLength(...) method to return the minimum length of S possible after performing the given operations. You can write your code in the space below the phrase “WRITE YOUR LOGIC HERE”.
+
+
+There will be multiple test cases running so the Input and Output should match exactly as provided.
+
+
+Input Format:
+
+The only line contains string S.
+
+Output Format:
+
+The output contains an integer denoting the minimum length of S possible after the given operations.
+
+
+Constraints:
+
+1 ≤ S.length ≤ 10^5.
+
+1 ≤ S.length ≤ 10^5.
+
+
+Sample Input 1:
+
+aaabb -- denotes the string S
+
+
+Sample Output 1:
+
+0
+
+
+Explanation 1:
+
+Here, choosing "a" and "b" will delete all the characters in the string. We will be left with an empty string.
+
+Hence, the length of string S will be 0.
+
+Sample Input 2:
+
+aaabbjadkja -- denotes the string S
+
+
+Sample Output 2:
+
+4
+
+
+Explanation 2:
+
+Here, choosing "a" and "b"/ "j" will delete all the respective characters in the string. We will be left with "jdkj" if we delete 'a' and 'b' or we will be left with "bbdk" if we delete 'a' and 'j'.
+
+Hence, the length of string S will be 4.
+
+Technology Stack
+Evaluation Criteria
+uiUx
+15%
+codeQuality
+25%
+architecture
+25%
+functionality
+30%
+databaseDesign
+5%
+--------------------------------
+
