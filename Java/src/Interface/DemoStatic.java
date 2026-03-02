@@ -1,0 +1,15 @@
+package Interface;
+interface calculator{
+	static void add (int a, int b)
+	{
+		System.out.println(a+b);
+	}
+}
+public class DemoStatic {
+ 
+	public static void main(String[] args)
+	{
+calculator.add(10, 20);
+	}
+ 
+}
